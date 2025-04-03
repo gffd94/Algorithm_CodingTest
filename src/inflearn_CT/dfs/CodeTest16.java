@@ -1,3 +1,5 @@
+package inflearn_CT.dfs;
+
 public class CodeTest16 {
 
     static void DFS(int n){

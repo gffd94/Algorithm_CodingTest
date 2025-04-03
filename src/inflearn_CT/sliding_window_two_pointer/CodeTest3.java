@@ -1,3 +1,5 @@
+package inflearn_CT.sliding_window_two_pointer;
+
 import java.util.Scanner;
 
 public class CodeTest3 {

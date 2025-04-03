@@ -1,31 +1,29 @@
+package inflearn_CT.array;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class CodeTest2 {
+public class CodeTest1 {
 
     public ArrayList<Integer> solution (int n, int[] a, int m, int[] b){
         ArrayList<Integer> answer = new ArrayList<>();
-        int p1 = 0, p2 = 0;
-        Arrays.sort(a);
-        Arrays.sort(b);
-
-        while(p1 < n && p2 < m){
-            if(a[p1] == b[p2]){
-                answer.add(a[p1++]);
-                p2++;
-            }else if(a[p1] > b[p2]){
-                p2++;
-            }else{
-                p1++;
+            int p1 = 0, p2 = 0;
+            while(p1<n && p2<m){
+                if(a[p1] < b[p2]){
+                    answer.add(a[p1++]);
+                }else{
+                    answer.add(b[p2++]);
+                }
             }
-        }
+
+            while(p1<n) answer.add(a[p1++]);
+            while(p2<m) answer.add(b[p2++]);
 
         return answer;
     }
 
     public static void main(String[] args) {
-        CodeTest2 ct = new CodeTest2();
+        CodeTest1 ct = new CodeTest1();
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] a = new int[n];

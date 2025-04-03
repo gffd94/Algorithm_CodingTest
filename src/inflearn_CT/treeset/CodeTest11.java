@@ -1,3 +1,5 @@
+package inflearn_CT.treeset;
+
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.TreeSet;

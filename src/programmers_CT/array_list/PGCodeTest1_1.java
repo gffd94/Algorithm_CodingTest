@@ -1,3 +1,5 @@
+package programmers_CT.array_list;
+
 import java.util.LinkedList;
 import java.util.List;
 

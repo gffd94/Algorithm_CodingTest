@@ -1,3 +1,5 @@
+package programmers_CT.array_list;
+
 public class PGCodeTest1 {
 
     static int[] solution(long n){

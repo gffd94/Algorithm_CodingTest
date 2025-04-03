@@ -1,3 +1,5 @@
+package inflearn_CT.array;
+
 import java.util.Scanner;
 
 public class CodeTest6 {

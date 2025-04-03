@@ -1,3 +1,5 @@
+package inflearn_CT.stack_queue;
+
 import java.util.Scanner;
 import java.util.Stack;
 

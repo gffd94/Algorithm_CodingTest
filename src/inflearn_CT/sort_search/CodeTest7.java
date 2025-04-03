@@ -1,3 +1,5 @@
+package inflearn_CT.sort_search;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
