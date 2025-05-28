@@ -1,15 +1,17 @@
 package inflearn_CT.dfs;
 
-public class dfs_CT8_4_2 {
+public class DFS_CT8_4_3 {
     /*
-    * 기존 피보나치 수열로 문제를 풀어보니 속도가 굉장히 느리다는 걸 알수있다.
-    * 또한 피보나치의 특징은 같은 n값을 몇번이고 반복해서 호출한다는 점이다
-    * 이를 개선하고자 fibo라는 배열을 생성해서 값을 저장해보기로 했다
+    * fibo라는 배열로 기존 값을 저장해놓고 사용하는 방법을 고안했다
+    * 하지만 이 역시도 n의 숫자가 커질수록 속도가 느려진다
+    * 그래서 fibo에 기존의 그 값이 있다면 dfs로 탐색하지 말고 바로 값을 가져오는 방법을 생각했다
     * */
     // 값을 저장할 배열
     static int[] fibo;
     
     static public int DFS(int n){
+        if(fibo[n] > 0) return fibo[n];
+
         if(n == 1){
             return fibo[1] = 1;
         }
@@ -22,7 +24,7 @@ public class dfs_CT8_4_2 {
 
 
     public static void main(String[] args) {
-          int n = 7;
+          int n = 45;
           // 1번부터 확인
           fibo = new int[n+1];
           DFS(n);
