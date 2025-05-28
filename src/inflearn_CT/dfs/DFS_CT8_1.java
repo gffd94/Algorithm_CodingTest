@@ -1,6 +1,6 @@
 package inflearn_CT.dfs;
 
-public class CodeTest15 {
+public class DFS_CT8_1 {
 
     public void DFS(int value){
         if(value == 0) return;
@@ -12,7 +12,7 @@ public class CodeTest15 {
     }
 
     public static void main(String[] args) {
-        CodeTest15 cd = new CodeTest15();
+        DFS_CT8_1 cd = new DFS_CT8_1();
         cd.DFS(3);
     }
 }
