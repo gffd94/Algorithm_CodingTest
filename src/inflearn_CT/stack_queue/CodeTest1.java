@@ -3,7 +3,7 @@ package inflearn_CT.stack_queue;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class CodeTest12 {
+public class CodeTest1 {
 
     public  static String solution(String string){
         String annswer = "YES";
