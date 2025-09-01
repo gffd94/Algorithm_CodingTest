@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Stack;
 
-public class CodeTest1 {
+public class BaekJoon_SQ_1 {
 
     /* 10799 쇠막대기
     * */

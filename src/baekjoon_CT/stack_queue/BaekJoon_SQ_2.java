@@ -3,7 +3,7 @@ package baekjoon_CT.stack_queue;
 import java.io.*;
 import java.util.*;
 
-public class CodeTest2 {
+public class BaekJoon_SQ_2 {
 
     /*  1874 - 수열스택
     * */
