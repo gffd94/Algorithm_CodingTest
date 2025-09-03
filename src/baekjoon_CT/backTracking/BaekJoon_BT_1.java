@@ -27,7 +27,7 @@ public class BaekJoon_BT_1 {
 
     }
 
-    static void backTracking(int depth){
+    private static void backTracking(int depth){
         // 종료 조건 : 길이가 M 이면 종료.
         if(depth == M){
             for ( int x : result) System.out.print(x+" ");
