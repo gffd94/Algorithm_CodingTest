@@ -35,7 +35,7 @@ public class BaekJoon_BT_2 {
 
     }
 
-    static void backTracking(int count, int start){
+    private static void backTracking(int count, int start){
         if(count == M){
             getDistance();
             return;
@@ -51,7 +51,7 @@ public class BaekJoon_BT_2 {
 
     }
 
-    static void getDistance() {
+    private static void getDistance() {
         int totaldistance = 0;
 
         for (int[] home : houses) {
