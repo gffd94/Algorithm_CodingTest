@@ -1,11 +1,11 @@
-package baekjoon_CT;
+package baekjoon_CT.sort;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_1421 {
 
     /* 1421 문제
     * */
