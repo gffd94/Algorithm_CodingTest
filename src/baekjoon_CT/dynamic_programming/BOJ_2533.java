@@ -1,68 +1,77 @@
 package baekjoon_CT.dynamic_programming;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class BOJ_2533 {
 
-    static int n = 0;
+    // 그래프(트리) 인접 리스트
     static ArrayList<Integer>[] graph;
-    static int[] p;
+    // dp[node][0] : node가 얼리어답터가 아닐 때, 서브트리 최소 얼리어답터 수
+    // dp[node][1] : node가 얼리어답터일 때, 서브트리 최소 얼리어답터 수
     static int[][] dp;
+    // 방문 체크 (부모-자식 방향 확정용)
+    static boolean[] visited;
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(bf.readLine(), " ");
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine()); // 사람(정점) 수
 
-        n = Integer.parseInt(st.nextToken());
-
-        graph = new ArrayList[n + 1];
-        p = new int[n + 1];
-        dp = new int[n + 1][2];
-        // dp[i][0]: i가 얼리어답터일 때, 서브트리의 최소 얼리어답터 수 (이 코드 로직에 맞게 재해석 필요)
-        // 원본 코드의 주석 로직: (i,0) -> 자신을 칠하지 않았을 때(일반인일 때) 최댓값, (i,1) -> 자신을 칠했을 때(일반인일 때) 최댓값
-        // 하지만 일반적인 2533 풀이(최소 얼리어답터 수 구하기)로 변환하는 것이 더 직관적일 수 있습니다.
-        // 현재 코드는 "최대 독립 집합" 크기를 구해 전체에서 빼는 방식입니다.
-
-        for (int i = 1; i <= n; i++) {
+        // 인접 리스트 초기화
+        graph = new ArrayList[N + 1];
+        for (int i = 1; i <= N; i++) {
             graph[i] = new ArrayList<>();
         }
 
-        for (int i = 1; i <= n - 1; i++) {
-            st = new StringTokenizer(bf.readLine(), " ");
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
+        // 친구 관계 (트리의 간선) 입력
+        for (int i = 0; i < N - 1; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
 
-            graph[x].add(y);
-            graph[y].add(x);
+            // 무방향(양방향) 그래프
+            graph[a].add(b);
+            graph[b].add(a);
         }
 
+        dp = new int[N + 1][2];
+        visited = new boolean[N + 1];
+
+        // 트리의 루트를 1번 노드로 가정하고 DFS 시작
         dfs(1);
 
-        // 전체 개수에서 '일반인일 수 있는 최대 사람 수'를 빼면 '최소 얼리어답터 수'가 됩니다.
-        System.out.println(n - Math.max(dp[1][0], dp[1][1]));
-
-        bf.close();
+        // 루트(1번)가 얼리어답터가 아닐 때 / 일 때 중 더 작은 값이 정답
+        int answer = Math.min(dp[1][0], dp[1][1]);
+        System.out.println(answer);
     }
 
+
     static void dfs(int cur) {
-        dp[cur][0] = 0;
-        dp[cur][1] = 1; // 1은 '일반인'으로 선택된 자기 자신을 의미
+        visited[cur] = true;
 
+        // 현재 노드를 얼리어답터로 선택하는 경우
+        dp[cur][1] = 1;  // 자기 자신(얼리어답터)이므로 1부터 시작
+        dp[cur][0] = 0;  // 얼리어답터가 아닌 경우는 일단 0으로 시작
+
+        // 자식(인접) 노드 순회
         for (int next : graph[cur]) {
-            if (p[cur] == next) {
-                continue;
+            if (!visited[next]) {
+                // 자식 노드 먼저 처리 (후위 순회)
+                dfs(next);
+
+                // 1) cur이 얼리어답터가 아닐 때 (dp[cur][0])
+                //    → 자식은 반드시 얼리어답터여야 조건을 만족
+                //    → 자식의 상태는 [1]만 허용
+                dp[cur][0] += dp[next][1];
+
+                // 2) cur이 얼리어답터일 때 (dp[cur][1])
+                //    → 자식은 얼리어답터일 수도 있고, 아닐 수도 있음
+                //    → 둘 중 더 적은 얼리어답터 수를 가지는 경우 선택
+                dp[cur][1] += Math.min(dp[next][0], dp[next][1]);
             }
-
-            p[next] = cur;
-            dfs(next);
-
-            // 내가 일반인이 아니라면(얼리어답터라면), 자식은 일반인이든 얼리어답터든 상관없이 더 많은 일반인을 가진 경우를 선택
-            // (코드의 변수 의미가 일반적인 2533 풀이와 반대임에 유의: 여기선 1이 일반인 선택됨을 의미)
-            dp[cur][0] += Math.max(dp[next][0], dp[next][1]);
-
-            // 내가 일반인이라면, 내 친구(자식)는 무조건 얼리어답터여야 하므로 일반인으로 선택될 수 없음(dp[next][0])
-            dp[cur][1] += dp[next][0];
         }
     }
 }
