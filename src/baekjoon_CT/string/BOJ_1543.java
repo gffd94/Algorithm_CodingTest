@@ -1,16 +1,26 @@
 package baekjoon_CT.string;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class BOJ_1543 {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine();
-        String target = br.readLine();
+        Scanner sc = new Scanner(System.in);
+        String doc = sc.nextLine();
+        String word = sc.nextLine();
 
+        int count = 0;
+        int startIndex = 0;
+
+        while (true){
+            int finalIndex = doc.indexOf(word, startIndex);
+            if(finalIndex < 0) break;
+            count++;
+            startIndex = finalIndex + word.length();
+        }
+
+        System.out.println(count);
 
     }
 }
