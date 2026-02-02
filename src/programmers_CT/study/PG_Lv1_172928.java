@@ -1,8 +1,6 @@
 package programmers_CT.study;
 
-import java.util.*;
-
-class PG_Lv1_Park {
+class PG_Lv1_172928 {
     public int[] solution(String[] park, String[] routes) {
         int H = park.length;        // 세로 길이 (행 개수)
         int W = park[0].length();   // 가로 길이 (열 개수)
