@@ -27,8 +27,9 @@ public class PG_Lv2_42839 {
         }
 
         for(int i = 0; i < remaining.length(); i++){
-            String next = remaining.substring(0, i) + remaining.substring(i+1);
-            permutation(next, current + remaining.charAt(i));
+            String picked = String.valueOf(remaining.charAt(i));
+            String rest = remaining.substring(0, i) + remaining.substring(i+1);
+            permutation(rest, current + picked);
         }
     }
 
